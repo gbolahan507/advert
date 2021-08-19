@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:jiji_clone/widgets/export.dart';
-import 'package:jiji_clone/widgets/size_calculator.dart';
+import 'package:jiji_clone/view/widgets/export.dart';
+import 'package:jiji_clone/view/widgets/size_calculator.dart';
 import 'custom_text_widget.dart';
 
 

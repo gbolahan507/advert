@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:jiji_clone/widgets/export.dart';
+import 'package:jiji_clone/view/widgets/export.dart';
 
 class ErrorOccurredWidget extends StatelessWidget {
   const ErrorOccurredWidget({Key key, this.error = 'An error occurred'})

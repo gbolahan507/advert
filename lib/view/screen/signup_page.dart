@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jiji_clone/core/view_models/auth_vm.dart';
-import 'package:jiji_clone/ui/screen/signin_page.dart';
-import 'package:jiji_clone/widgets/export.dart';
+import 'package:jiji_clone/view/screen/signin_page.dart';
+import 'package:jiji_clone/view/widgets/export.dart';
 
 class SignupScreen extends StatelessWidget {
   final _firstNameController = TextEditingController();

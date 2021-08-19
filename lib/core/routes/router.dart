@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:jiji_clone/ui/screen/profiletest.dart';
-import 'package:jiji_clone/ui/screen/signin_page.dart';
-import 'package:jiji_clone/ui/screen/signup_page.dart';
-import 'package:jiji_clone/ui/screen/splash_screen.dart';
 import 'package:jiji_clone/core/routes/routes.dart';
+import 'package:jiji_clone/view/screen/profile_screen.dart';
+import 'package:jiji_clone/view/screen/signin_page.dart';
+import 'package:jiji_clone/view/screen/signup_page.dart';
+import 'package:jiji_clone/view/screen/splash_screen.dart';
 
 
 

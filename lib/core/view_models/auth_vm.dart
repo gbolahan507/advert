@@ -6,7 +6,7 @@ import 'package:jiji_clone/core/storage/local_storage.dart';
 import 'package:jiji_clone/core/utils/custom_exception.dart';
 import 'package:jiji_clone/locator.dart';
 import 'package:jiji_clone/core/routes/routes.dart';
-import 'package:jiji_clone/widgets/snackbar.dart';
+import 'package:jiji_clone/view/widgets/snackbar.dart';
 import 'base_vm.dart';
 
 class AuthViewModel extends BaseModel {

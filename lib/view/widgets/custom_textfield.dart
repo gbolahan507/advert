@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jiji_clone/app/styles/spacing.dart';
 import 'package:jiji_clone/app/styles/styles.dart';
-import 'package:jiji_clone/widgets/export.dart';
+import 'package:jiji_clone/view/widgets/export.dart';
 
 class CustomTextField extends StatefulWidget {
   const CustomTextField(

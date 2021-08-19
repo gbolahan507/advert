@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jiji_clone/core/view_models/startup_vm.dart';
-import 'package:jiji_clone/widgets/export.dart';
+import 'package:jiji_clone/view/widgets/export.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 

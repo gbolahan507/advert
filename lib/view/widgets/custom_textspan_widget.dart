@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:jiji_clone/widgets/export.dart';
+import 'package:jiji_clone/view/widgets/export.dart';
 
 TextSpan customTextSpan(
     {String text,

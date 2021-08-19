@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:jiji_clone/core/view_models/base_vm.dart';
 import 'package:jiji_clone/app/messages.dart';
-import 'package:jiji_clone/widgets/export.dart';
+import 'package:jiji_clone/view/widgets/snackbar.dart';
 
 
 
