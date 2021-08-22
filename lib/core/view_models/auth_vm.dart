@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jiji_clone/core/api/auth_api.dart';
+import 'package:jiji_clone/core/model/edit_profile.dart';
 import 'package:jiji_clone/core/model/profile_model.dart';
 import 'package:jiji_clone/core/model/user_model.dart';
 import 'package:jiji_clone/core/storage/local_storage.dart';
@@ -10,7 +11,6 @@ import 'package:jiji_clone/view/widgets/snackbar.dart';
 import 'base_vm.dart';
 
 class AuthViewModel extends BaseModel {
-
   final AuthApi _authApi = locator<AuthApi>();
   String error1;
   String error2;
@@ -19,6 +19,7 @@ class AuthViewModel extends BaseModel {
 
   UserModel userModel;
   ProfileModel profileModel;
+  EditProfileModel editProfileModel;
 
   Future<void> createUsers(
       BuildContext context, Map<String, String> data) async {
@@ -44,7 +45,8 @@ class AuthViewModel extends BaseModel {
     try {
       userModel = await _authApi.loginUsers(data);
       AppCache.saveToken(userModel.token);
-      navigate.navigateToReplacing(ProfileView);
+      AppCache.saveUser(userModel);
+      navigate.navigateToReplacing(HomeScreenView);
       setBusy(false);
       notifyListeners();
     } on CustomException catch (e) {
@@ -60,6 +62,22 @@ class AuthViewModel extends BaseModel {
     setBusy(true);
     try {
       profileModel = await _authApi.getMe();
+      AppCache.saveToken(userModel.token);
+      setBusy(false);
+      notifyListeners();
+      return profileModel;
+    } on CustomException catch (e) {
+      error1 = e.message;
+      setBusy(false);
+      showErrorDialog(e);
+      notifyListeners();
+    }
+  }
+
+  Future<void> editgetMe(Map<String, String> data) async {
+    setBusy(true);
+    try {
+      editProfileModel = await _authApi.editgetMe(data);
       setBusy(false);
       notifyListeners();
       return profileModel;

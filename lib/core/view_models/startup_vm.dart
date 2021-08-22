@@ -14,7 +14,7 @@ class StartUpViewModel extends BaseModel {
     if (token != null ) {
       hasLoggedIn = true;
       Future<void>.delayed(const Duration(seconds: 2), () {
-        navigate.navigateToReplacing(ProfileView);
+        navigate.navigateToReplacing(HomeScreenView);
       });
     } else
       Future<void>.delayed(const Duration(seconds: 2), () {

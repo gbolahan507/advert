@@ -1,12 +1,14 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
+import 'package:jiji_clone/core/model/profile_model.dart';
 import 'package:jiji_clone/core/model/user_model.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 const String kUserBoxName = 'userBox';
 const String kUser = 'userr';
+const String kUserName = 'userName';
 const String kserial = 'serialss';
 const String kToken = 'token';
 const String kSavedBox = 'saved01';
@@ -57,6 +59,13 @@ class AppCache {
     _box.put(kUser, user.toJson());
   }
 
+    static void saveUserName(ProfileModel userName) {
+    if (userName == null) {
+      return;
+    }
+    _box.put(kUserName, userName.toJson());
+  }
+
   static void saveimage(String value) {
     _box.put(kimage, value);
   }
@@ -78,6 +87,15 @@ class AppCache {
       return null;
     }
     return UserModel.fromJson(data);
+  }
+
+
+    static ProfileModel getUserName() {
+    dynamic data = _box.get(kUserName);
+    if (data == null) {
+      return null;
+    }
+    return ProfileModel.fromJson(data);
   }
 
   static void clear() {

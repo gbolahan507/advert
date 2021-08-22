@@ -5,18 +5,16 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jiji_clone/core/routes/router.dart';
 import 'package:jiji_clone/core/view_models/auth_vm.dart';
-import 'package:jiji_clone/view/screen/edit_profile.dart';
+import 'package:jiji_clone/view/screen/profile_screen.dart';
 import 'package:jiji_clone/view/widgets/export.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({Key key}) : super(key: key);
-
+class EditProfileScreen extends StatefulWidget {
   @override
-  _ProfileScreenState createState() => _ProfileScreenState();
+  _EditProfileScreenState createState() => _EditProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _EditProfileScreenState extends State<EditProfileScreen> {
   PickedFile _image;
 
   TextEditingController fullNameController = TextEditingController();
@@ -111,28 +109,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             //               ),
                             //       ),
                             verticalSpaceMedium,
-                            Column(
-                              children: [
-                                ProfileContainer(
-                                  icon: Icons.person,
-                                  title: 'Username',
-                                  subTitle:
-                                      model?.profileModel?.user?.fullname ?? '',
-                                ),
-                                ProfileContainer(
-                                    icon: Icons.email,
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              child: Column(
+                                children: [
+                                  CustomTextField(
+                                    title: 'FullName',
+                                    controller: fullNameController,
+                                    // enabled: false,
+                                  ),
+                                  verticalSpaceMedium,
+                                  CustomTextField(
                                     title: 'Email',
-                                    subTitle:
-                                        model?.profileModel?.user?.email ?? ''),
-                                ProfileContainer(
-                                    icon: Icons.phone,
+                                    controller: emailController,
+                                    // enabled: false,
+                                  ),
+                                  verticalSpaceMedium,
+                                  CustomTextField(
                                     title: 'Phone',
-                                    subTitle:
-                                        model?.profileModel?.user?.phone ?? ''),
-                                verticalSpaceLarge,
-                                verticalSpaceLarge,
-                                verticalSpaceLarge,
-                              ],
+                                    controller: phoneController,
+                                    // enabled: false,
+                                  ),
+                                ],
+                              ),
                             ),
                             verticalSpaceMedium,
                             verticalSpaceMedium,
@@ -143,8 +143,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               children: [
                                 InkWell(
                                     onTap: () {
-                                      routeToReplace(
-                                          context, EditProfileScreen());
+                                      final Map<String, String> data = {
+                                        'fullname': fullNameController.text,
+                                        'phone': phoneController.text,
+                                        'email': emailController.text,
+                                      };
+                                      print(data);
+                                      model.editgetMe(data);
+                                      // routeToReplace(context, ProfileScreen());
                                     },
                                     child: Container(
                                         padding: EdgeInsets.symmetric(
@@ -153,7 +159,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             borderRadius:
                                                 BorderRadius.circular(8),
                                             color: Styles.colorLightBlue),
-                                        child: CustomText('Edit Profile'))),
+                                        child: CustomText('Save Profile'))),
                               ],
                             ),
                           ],
@@ -170,7 +176,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       iconTheme: IconThemeData(color: Styles.colorBlack),
       elevation: 0,
       title: CustomText(
-        'Profiles',
+        'Edit Profiles',
         color: Styles.colorBlack,
         fontWeight: FontWeight.bold,
         fontSize: 20.0,

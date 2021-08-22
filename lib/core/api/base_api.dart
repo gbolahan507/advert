@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:jiji_clone/core/storage/local_storage.dart';
 import 'package:jiji_clone/locator.dart';
 import 'package:jiji_clone/app/messages.dart';
 import 'package:jiji_clone/core/routes/navigator.dart';
@@ -12,16 +11,8 @@ class BaseAPI {
   Options defaultOptions = Options(
       sendTimeout: 20000, // 20 seconds
       receiveTimeout: 20000, // 20 seconds
-      contentType: 'application/json',
-      headers: {'Authorization': "Bearer ${AppCache.getToken()}"},
       validateStatus: (status) => status < 500);
 
-    // Options profileOptions = Options(
-    //   sendTimeout: 20000, // 20 seconds
-    //   receiveTimeout: 20000, // 20 seconds
-    //   contentType: 'application/json',
-    //   headers: {'Authorization': "Bearer ${AppCache.getToken()}"},
-    //   validateStatus: (status) => status < 500);
 
 
   NavigationService navigate = locator<NavigationService>();

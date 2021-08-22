@@ -15,6 +15,7 @@ class CustomText extends StatelessWidget {
       this.rightMargin = 0.0,
       this.bottomMargin = 0.0,
       this.letterSpacing,
+      this.textAlign,
       this.fontFamily})
       : super(key: key);
   final String text;
@@ -28,6 +29,7 @@ class CustomText extends StatelessWidget {
   final double rightMargin;
   final double bottomMargin;
   final bool centerText;
+  final TextAlign textAlign;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +42,9 @@ class CustomText extends StatelessWidget {
       ),
       child: Text(
         text,
-        textAlign: centerText ? TextAlign.center : null,
+        textAlign: textAlign ?? TextAlign.center,
+        overflow: TextOverflow.ellipsis,
+        maxLines: 1,
         style: GoogleFonts.nunito(
             letterSpacing: letterSpacing,
             //   fontFamily: fontFamily ?? 'Crossten',

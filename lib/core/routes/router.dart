@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jiji_clone/core/routes/routes.dart';
+import 'package:jiji_clone/view/screen/homepage.dart';
 import 'package:jiji_clone/view/screen/profile_screen.dart';
 import 'package:jiji_clone/view/screen/signin_page.dart';
 import 'package:jiji_clone/view/screen/signup_page.dart';
@@ -36,6 +37,13 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return _getPageRoute(
         routeName: settings.name,
         view:  ProfileScreen(),
+        args: settings.arguments,
+      );
+
+           case HomeScreenView:
+      return _getPageRoute(
+        routeName: settings.name,
+        view:  HomeSccreen(),
         args: settings.arguments,
       );
 

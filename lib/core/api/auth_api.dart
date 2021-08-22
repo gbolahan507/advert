@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:dio/dio.dart';
+import 'package:jiji_clone/core/model/edit_profile.dart';
 import 'package:jiji_clone/core/model/error_model.dart';
 import 'package:jiji_clone/core/model/profile_model.dart';
 import 'package:jiji_clone/core/model/user_model.dart';
@@ -52,11 +53,36 @@ class AuthApi extends BaseAPI {
 
   Future<ProfileModel> getMe() async {
     try {
-      var response = await Dio().get("$baseUrl/me", options: defaultOptions);
-      log.d(response.data);
+      var response = await Dio().get("$baseUrl/me",
+          options: defaultOptions.copyWith(
+            contentType: 'application/json',
+            headers: {'Authorization': "Bearer ${AppCache.getToken()}"},
+          ));
+      // log.d(response.data);
       switch (response.statusCode) {
         case SERVER_OKAY:
           return ProfileModel.fromJson(response.data);
+          break;
+        default:
+          throw ErrorModel.fromJson(response.data).error;
+          break;
+      }
+    } catch (e) {
+      throw CustomException(DioErrorUtil.handleError(e));
+    }
+  }
+
+  Future<EditProfileModel> editgetMe(Map<String, String> data) async {
+    try {
+      var response = await Dio().put("$baseUrl/profile",
+          options: defaultOptions.copyWith(
+            contentType: 'application/json',
+            headers: {'Authorization': "Bearer ${AppCache.getToken()}"},
+          ));
+      log.d(response.data);
+      switch (response.data) {
+        case SERVER_OKAY:
+          return EditProfileModel.fromJson(response.data);
           break;
         default:
           throw ErrorModel.fromJson(response.data).error;

@@ -1,29 +1,29 @@
 // To parse this JSON data, do
 //
-//     final userModel = userModelFromJson(jsonString);
+//     final editProfileModel = editProfileModelFromJson(jsonString);
 
 import 'dart:convert';
 
-UserModel userModelFromJson(String str) => UserModel.fromJson(json.decode(str));
+EditProfileModel editProfileModelFromJson(String str) => EditProfileModel.fromJson(json.decode(str));
 
-String userModelToJson(UserModel data) => json.encode(data.toJson());
+String editProfileModelToJson(EditProfileModel data) => json.encode(data.toJson());
 
-class UserModel {
-    UserModel({
-        this.token,
+class EditProfileModel {
+    EditProfileModel({
+        this.success,
         this.user,
     });
 
-    String token;
+    bool success;
     User user;
 
-    factory UserModel.fromJson(dynamic json) => UserModel(
-        token: json["token"],
+    factory EditProfileModel.fromJson(Map<String, dynamic> json) => EditProfileModel(
+        success: json["success"],
         user: User.fromJson(json["user"]),
     );
 
     Map<String, dynamic> toJson() => {
-        "token": token,
+        "success": success,
         "user": user.toJson(),
     };
 }
@@ -46,6 +46,9 @@ class User {
         this.categories,
         this.serviceSearchStrings,
         this.id,
+        this.createdAt,
+        this.updatedAt,
+        this.v,
         this.userId,
     });
 
@@ -65,9 +68,12 @@ class User {
     List<dynamic> categories;
     List<dynamic> serviceSearchStrings;
     String id;
+    DateTime createdAt;
+    DateTime updatedAt;
+    int v;
     String userId;
 
-    factory User.fromJson(dynamic json) => User(
+    factory User.fromJson(Map<String, dynamic> json) => User(
         fullname: json["fullname"],
         phone: json["phone"],
         profileUrl: json["profile_url"],
@@ -84,6 +90,9 @@ class User {
         categories: List<dynamic>.from(json["categories"].map((x) => x)),
         serviceSearchStrings: List<dynamic>.from(json["serviceSearchStrings"].map((x) => x)),
         id: json["_id"],
+        createdAt: DateTime.parse(json["createdAt"]),
+        updatedAt: DateTime.parse(json["updatedAt"]),
+        v: json["__v"],
         userId: json["id"],
     );
 
@@ -104,6 +113,9 @@ class User {
         "categories": List<dynamic>.from(categories.map((x) => x)),
         "serviceSearchStrings": List<dynamic>.from(serviceSearchStrings.map((x) => x)),
         "_id": id,
+        "createdAt": createdAt.toIso8601String(),
+        "updatedAt": updatedAt.toIso8601String(),
+        "__v": v,
         "id": userId,
     };
 }
