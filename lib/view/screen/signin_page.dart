@@ -5,12 +5,19 @@ import 'package:jiji_clone/core/routes/router.dart';
 import 'package:jiji_clone/view/widgets/custom_text_widget.dart';
 import 'package:jiji_clone/view/widgets/export.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
 
   final _passwordController = TextEditingController();
 
   final _formKey = new GlobalKey<FormState>();
+
+  bool user = true;
 
   @override
   Widget build(BuildContext context) {
@@ -63,8 +70,36 @@ class LoginScreen extends StatelessWidget {
                           verticalSpaceTiny,
                           verticalSpaceSmall,
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        user = !user;
+                                      });
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: 5, horizontal: 10),
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          color: user
+                                              ? Styles.appBackground1
+                                              : Styles.colorDeepPink),
+                                      child: CustomText(
+                                        user ? 'User' : 'Admin',
+                                        color: Styles.colorWhite,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
                               InkWell(
                                 onTap: () {},
                                 child: CustomText(
@@ -91,13 +126,16 @@ class LoginScreen extends StatelessWidget {
                               };
                               if (_formKey.currentState.validate()) {
                                 print(data);
-                                model.loginUser(
-                                  context,
-                                  data,
-                                );
+                                user
+                                    ? model.loginUser(
+                                        context,
+                                        data,
+                                      )
+                                    : print('Admin Alone');
                               }
                             },
                           ),
+                          verticalSpaceMedium,
                           verticalSpaceLarge,
                           verticalSpaceMedium,
                           RichText(

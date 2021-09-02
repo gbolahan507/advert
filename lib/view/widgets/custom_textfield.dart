@@ -21,8 +21,12 @@ class CustomTextField extends StatefulWidget {
       this.hintText,
       this.fillColor,
       this.prefixIcon,
+      this.borderBorderColor,
+      this.enableBorderColor,
+      this.focusedBorderColor,
       this.titleColor,
       this.image,
+      this.showTitle = true,
       this.title,
       this.obscure})
       : super(key: key);
@@ -32,9 +36,14 @@ class CustomTextField extends StatefulWidget {
   final FocusNode focusNode;
   final int maxLength;
   final int maxLines;
+  final bool showTitle;
   final bool enabled;
   final bool obscure;
-  final Color titleColor, fillColor;
+  final Color titleColor,
+      focusedBorderColor,
+      enableBorderColor,
+      borderBorderColor,
+      fillColor;
   final bool autoFocus;
   final String labelText, title;
   final String hintText;
@@ -63,12 +72,15 @@ class _CustomTextFieldState extends State<CustomTextField> {
       children: [
         Row(
           children: [
-            CustomText(
-              widget.title,
-              fontWeight: FontWeight.bold,
-              fontSize: 14,
-              color: widget.titleColor ?? Styles.colorBlack.withOpacity(0.8),
-            ),
+            widget.showTitle
+                ? CustomText(
+                    widget.title,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                    color:
+                        widget.titleColor ?? Styles.colorBlack.withOpacity(0.8),
+                  )
+                : SizedBox()
           ],
         ),
         verticalSpaceTiny,
@@ -108,15 +120,21 @@ class _CustomTextFieldState extends State<CustomTextField> {
               errorStyle: const TextStyle(color: Color(0xff222222)),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(color: Styles.appBackground1, width: 2),
+                borderSide: BorderSide(
+                    color: widget.focusedBorderColor ?? Styles.appBackground1,
+                    width: 2),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(color: Styles.appBackground1, width: 1),
+                borderSide: BorderSide(
+                    color: widget.enableBorderColor ?? Styles.appBackground1,
+                    width: 1),
               ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(color: Styles.appBackground1, width: 1),
+                borderSide: BorderSide(
+                    color: widget.borderBorderColor ?? Styles.appBackground1,
+                    width: 1),
               ),
               counterText: '',
               prefixIcon: widget.prefixIcon,

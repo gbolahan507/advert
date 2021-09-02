@@ -1,78 +1,80 @@
 import 'package:flutter/material.dart';
+import 'package:jiji_clone/app/styles/spacing.dart';
+import 'package:jiji_clone/app/styles/styles.dart';
 import 'package:jiji_clone/core/storage/local_storage.dart';
-import 'package:jiji_clone/view/widgets/custom_icon.dart';
-import 'package:jiji_clone/view/widgets/export.dart';
+import 'package:jiji_clone/view/widgets/custom_text_widget.dart';
 
-class MyAppBar extends StatelessWidget {
-  const MyAppBar({
+class Heading extends StatelessWidget {
+  final String skillTile;
+  final bool showName;
+  const Heading({
     Key key,
+    this.skillTile,
+    this.showName = true,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      titleSpacing: 0.0,
-      automaticallyImplyLeading: false,
-      backgroundColor: Styles.colorWhite,
-      elevation: 0.0,
-      title: Padding(
-        padding: const EdgeInsets.only(left: 20),
-        child: RichText(
-          textAlign: TextAlign.center,
-          text: customTextSpan(
-            text: 'Hi,  ',
-            context: context,
-            fontSize: 14,
-            fontWeight: FontWeight.normal,
-            color: Styles.colorBlack,
-            children: <TextSpan>[
-              customTextSpan(
-                text: '${AppCache.getUser().user.fullname.toString()}',
-                context: context,
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                color: Styles.appBackground1,
-              ),
-            ],
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          showName
+              ? Row(
+                  children: [
+                    CustomText('Welcome  ',
+                        fontSize: 14, fontWeight: FontWeight.bold),
+                    CustomText('${AppCache.getUser().user.fullname.toString()}',
+                        fontSize: 14,
+                        color: Styles.appBackground1,
+                        fontWeight: FontWeight.bold),
+                  ],
+                )
+              : SizedBox(),
+          showName ? verticalSpaceSmall : SizedBox(),
+          CustomText(skillTile ?? 'Hire the best Heartisan',
+              fontSize: 20, fontWeight: FontWeight.bold),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 10),
+            child: Row(
+              children: [
+                _searchBox(),
+              ],
+            ),
           ),
-        ),
-      ),
-      bottom: PreferredSize(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 20, bottom: 15),
-          child: Row(
-            children: [
-              CustomText(
-                'What are you looking for ?',
-                fontSize: 13,
-                color: Styles.colorGrey,
-              ),
-            ],
+          SizedBox(
+            height: 24,
           ),
-        ),
-        preferredSize: Size.fromHeight(0),
+        ],
       ),
+    );
+  }
 
-      //
-      // actions: [
-      //   Padding(
-      //     padding: const EdgeInsets.only(right: 20),
-      //     child: InkWell(
-      //       onTap: () {},
-      //       child: Column(
-      //         children: [
-      //           SizedBox(
-      //             height: 30,
-      //           ),
-      //           CustomIcon(
-      //             icon: Icons.notifications,
-      //             // onPressed: () => routeTo(context, DashBoardNotification()),
-      //           ),
-      //         ],
-      //       ),
-      //     ),
-      //   )
-      // ],
+  Widget _searchBox() {
+    return Expanded(
+      child: Container(
+        height: 40,
+        child: TextField(
+          decoration: InputDecoration(
+            hintText: 'Search',
+            prefixIcon: Icon(
+              Icons.search,
+              size: 30,
+            ),
+            filled: true,
+            fillColor: Colors.grey.shade200,
+            contentPadding: EdgeInsets.all(15),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey.shade200),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey.shade200),
+              borderRadius: BorderRadius.circular(15),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

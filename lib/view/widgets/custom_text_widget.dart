@@ -16,6 +16,7 @@ class CustomText extends StatelessWidget {
       this.bottomMargin = 0.0,
       this.letterSpacing,
       this.textAlign,
+      this.maxLines,
       this.fontFamily})
       : super(key: key);
   final String text;
@@ -25,6 +26,7 @@ class CustomText extends StatelessWidget {
   final Color color;
   final double leftMargin;
   final double letterSpacing;
+  final maxLines;
   final double topMargin;
   final double rightMargin;
   final double bottomMargin;
@@ -44,7 +46,7 @@ class CustomText extends StatelessWidget {
         text,
         textAlign: textAlign ?? TextAlign.center,
         overflow: TextOverflow.ellipsis,
-        maxLines: 1,
+        maxLines: maxLines ?? 1,
         style: GoogleFonts.nunito(
             letterSpacing: letterSpacing,
             //   fontFamily: fontFamily ?? 'Crossten',
