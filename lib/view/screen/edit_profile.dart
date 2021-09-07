@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:jiji_clone/core/routes/router.dart';
 import 'package:jiji_clone/core/view_models/auth_vm.dart';
-import 'package:jiji_clone/view/screen/profile_screen.dart';
 import 'package:jiji_clone/view/widgets/export.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 
@@ -184,18 +182,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
-  // Future<void> getImageGallery(ImageSource source) async {
-  //   Validate.offKeyboard(context);
-  //   final PickedFile result = await ImagePicker().getImage(source: source);
-
-  //   if (result != null) {
-  //     _image = File(result.path);
-  //   } else {
-  //     return;
-  //   }
-  //   setState(() {});
-  // }
-
   Future takephoto(ImageSource source) async {
     try {
       final PickedFile result = await ImagePicker().getImage(source: source);
@@ -285,7 +271,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 // }
 
 class H2text extends StatelessWidget {
-  String text;
+  final String text;
   H2text({Key key, this.text}) : super(key: key);
 
   @override

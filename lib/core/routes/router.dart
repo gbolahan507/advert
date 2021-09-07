@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:jiji_clone/core/model/user_model2.dart';
 import 'package:jiji_clone/core/routes/routes.dart';
 import 'package:jiji_clone/view/screen/homepage.dart';
 import 'package:jiji_clone/view/screen/profile_screen.dart';
@@ -7,46 +8,41 @@ import 'package:jiji_clone/view/screen/signin_page.dart';
 import 'package:jiji_clone/view/screen/signup_page.dart';
 import 'package:jiji_clone/view/screen/splash_screen.dart';
 
-
-
-
-
 Route<dynamic> generateRoute(RouteSettings settings) {
-
+  UserModel userModel;
 
   switch (settings.name) {
     case SplashView:
       return _getPageRoute(
         routeName: settings.name,
-        view:  SplashScreen(),
+        view: SplashScreen(),
       );
     case LoginView:
       return _getPageRoute(
         routeName: settings.name,
-        view:  LoginScreen(),
+        view: LoginScreen(),
       );
 
     case SignupView:
       return _getPageRoute(
         routeName: settings.name,
-        view:  SignupScreen(),
-        args: settings.arguments,
-      );
-      
-     case ProfileView:
-      return _getPageRoute(
-        routeName: settings.name,
-        view:  ProfileScreen(),
+        view: SignupScreen(),
         args: settings.arguments,
       );
 
-           case HomeScreenView:
+    case ProfileView:
       return _getPageRoute(
         routeName: settings.name,
-        view:  HomeSccreen(),
+        view: ProfileScreen(),
         args: settings.arguments,
       );
 
+    case HomeScreenView:
+      return _getPageRoute(
+        routeName: settings.name,
+        view: HomeSccreen(userModel: userModel),
+        args: settings.arguments,
+      );
 
     default:
       return CupertinoPageRoute<dynamic>(
@@ -64,7 +60,6 @@ PageRoute<dynamic> _getPageRoute({String routeName, Widget view, Object args}) {
       settings: RouteSettings(name: routeName, arguments: args),
       builder: (_) => view);
 }
-
 
 void routeTo(BuildContext context, Widget view, {bool dialog = false}) {
   Navigator.push<void>(

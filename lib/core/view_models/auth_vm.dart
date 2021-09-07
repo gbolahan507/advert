@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:jiji_clone/core/api/auth_api.dart';
 import 'package:jiji_clone/core/model/edit_profile.dart';
 import 'package:jiji_clone/core/model/profile_model.dart';
-import 'package:jiji_clone/core/model/user_model.dart';
+import 'package:jiji_clone/core/model/user_model2.dart';
+import 'package:jiji_clone/core/routes/router.dart';
 import 'package:jiji_clone/core/storage/local_storage.dart';
 import 'package:jiji_clone/core/utils/custom_exception.dart';
 import 'package:jiji_clone/locator.dart';
 import 'package:jiji_clone/core/routes/routes.dart';
+import 'package:jiji_clone/view/screen/homepage.dart';
+import 'package:jiji_clone/view/screen/signin_page.dart';
 import 'package:jiji_clone/view/widgets/snackbar.dart';
 import 'base_vm.dart';
 
@@ -29,7 +32,8 @@ class AuthViewModel extends BaseModel {
       dialog.showDialog(
           title: 'Success', description: 'Login into your account');
       setBusy(false);
-      navigate.navigateToReplacing(LoginView);
+
+      routeTo(context, LoginScreen(userModel: userModel));
       notifyListeners();
     } on CustomException catch (e) {
       error2 = e.message;
@@ -46,7 +50,12 @@ class AuthViewModel extends BaseModel {
       userModel = await _authApi.loginUsers(data);
       AppCache.saveToken(userModel.token);
       AppCache.saveUser(userModel);
-      navigate.navigateToReplacing(HomeScreenView);
+      // navigate.navigateToReplacing(HomeScreenView);
+      routeToReplace(
+          context,
+          HomeSccreen(
+            userModel: userModel,
+          ));
       setBusy(false);
       notifyListeners();
     } on CustomException catch (e) {

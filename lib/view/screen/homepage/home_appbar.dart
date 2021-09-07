@@ -5,11 +5,14 @@ import 'package:jiji_clone/core/storage/local_storage.dart';
 import 'package:jiji_clone/view/widgets/custom_text_widget.dart';
 
 class Heading extends StatelessWidget {
+
   final String skillTile;
   final bool showName;
+  final String text;
   const Heading({
     Key key,
     this.skillTile,
+    this.text,
     this.showName = true,
   }) : super(key: key);
 
@@ -32,7 +35,7 @@ class Heading extends StatelessWidget {
                 )
               : SizedBox(),
           showName ? verticalSpaceSmall : SizedBox(),
-          CustomText(skillTile ?? 'Hire the best Heartisan',
+          CustomText(skillTile ?? text,
               fontSize: 20, fontWeight: FontWeight.bold),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 10),

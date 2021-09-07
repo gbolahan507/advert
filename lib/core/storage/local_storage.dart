@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:jiji_clone/core/model/profile_model.dart';
-import 'package:jiji_clone/core/model/user_model.dart';
+import 'package:jiji_clone/core/model/user_model2.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 

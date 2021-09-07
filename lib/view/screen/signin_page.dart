@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jiji_clone/core/model/user_model2.dart';
 import 'package:jiji_clone/core/view_models/auth_vm.dart';
 import 'package:jiji_clone/view/screen/signup_page.dart';
 import 'package:jiji_clone/core/routes/router.dart';
@@ -6,17 +7,17 @@ import 'package:jiji_clone/view/widgets/custom_text_widget.dart';
 import 'package:jiji_clone/view/widgets/export.dart';
 
 class LoginScreen extends StatefulWidget {
+  final UserModel userModel;
+  LoginScreen({this.userModel});
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
-
   final _passwordController = TextEditingController();
-
   final _formKey = new GlobalKey<FormState>();
-
   bool user = true;
 
   @override
@@ -126,12 +127,11 @@ class _LoginScreenState extends State<LoginScreen> {
                               };
                               if (_formKey.currentState.validate()) {
                                 print(data);
-                                user
-                                    ? model.loginUser(
-                                        context,
-                                        data,
-                                      )
-                                    : print('Admin Alone');
+
+                                model.loginUser(
+                                  context,
+                                  data,
+                                );
                               }
                             },
                           ),

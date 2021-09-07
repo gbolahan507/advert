@@ -50,6 +50,8 @@ dependencies:
   loading_overlay:
   flutter_spinkit: ^5.0.0
   cached_network_image: ^3.0.0
+  file_picker: ^4.0.1
+  dotted_border:
    
 
 

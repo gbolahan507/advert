@@ -6,6 +6,7 @@ import 'package:jiji_clone/core/model/skills_model.dart';
 import 'package:jiji_clone/core/routes/router.dart';
 import 'package:jiji_clone/core/utils/base_view.dart';
 import 'package:jiji_clone/core/view_models/skills_vm.dart';
+import 'package:jiji_clone/view/screen/Admin/post_service.dart';
 import 'package:jiji_clone/view/screen/detail_Screen.dart';
 import 'package:jiji_clone/view/screen/homepage/home_appbar.dart';
 import 'package:jiji_clone/view/widgets/custom_text_widget.dart';
@@ -13,11 +14,11 @@ import 'package:jiji_clone/view/widgets/export.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-class SkillScreen extends StatelessWidget {
+class AdminSkillsScreen extends StatelessWidget {
   final SkillsModel skills;
   final String skillTitle;
 
-  SkillScreen({this.skills, this.skillTitle});
+  AdminSkillsScreen({this.skills, this.skillTitle});
   final spinkit = SpinKitCircle(
     color: Styles.appBackground,
     size: 30.0,
@@ -50,6 +51,28 @@ class SkillScreen extends StatelessWidget {
                           progressIndicator: spinkit,
                           child: ListView(
                             children: [
+                              Row(
+                                children: [
+                                  CustomText(
+                                    'Number of Registered Heartisan',
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                  Spacer(),
+                                  CustomText(
+                                    !model.busy
+                                        ? model.allServices?.length
+                                                .toString() ??
+                                            '0'
+                                        : '0',
+                                    color: Styles.colorDeepPink,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w700,
+                                  )
+                                ],
+                              ),
+                              verticalSpaceSmall,
+                              verticalSpaceSmall,
                               ListView.separated(
                                   shrinkWrap: true,
                                   scrollDirection: Axis.vertical,
@@ -202,7 +225,14 @@ class SkillScreen extends StatelessWidget {
                                         ],
                                       ),
                                     );
-                                  })
+                                  }),
+                              CustomButton(
+                                onPressed: () {
+                                  routeTo(context, PostServiceScreen(skillsId: skills.id));
+                                },
+                                title: 'Post Service',
+                                height: 50,
+                              )
                             ],
                           ),
                         ),

@@ -279,7 +279,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 // }
 
 class H2text extends StatelessWidget {
-  String text;
+ final String text;
   H2text({Key key, this.text}) : super(key: key);
 
   @override

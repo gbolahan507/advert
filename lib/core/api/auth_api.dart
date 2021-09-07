@@ -3,15 +3,13 @@ import 'package:dio/dio.dart';
 import 'package:jiji_clone/core/model/edit_profile.dart';
 import 'package:jiji_clone/core/model/error_model.dart';
 import 'package:jiji_clone/core/model/profile_model.dart';
-import 'package:jiji_clone/core/model/user_model.dart';
+import 'package:jiji_clone/core/model/user_model2.dart';
 import 'package:jiji_clone/core/storage/local_storage.dart';
 import 'package:jiji_clone/core/utils/custom_exception.dart';
 import 'package:jiji_clone/core/utils/error_util.dart';
 import 'package:jiji_clone/app/messages.dart';
 import 'package:logger/logger.dart';
 import 'base_api.dart';
-
-
 
 class AuthApi extends BaseAPI {
   Logger log = Logger();
@@ -35,12 +33,11 @@ class AuthApi extends BaseAPI {
     }
   }
 
-
-
   Future<UserModel> loginUsers(Map<String, dynamic> data) async {
     try {
       var response = await Dio()
           .post("$baseUrl/login", data: data, options: defaultOptions);
+      // log.d(response.data);
       switch (response.statusCode) {
         case SERVER_OKAY:
           return UserModel.fromJson(response.data);
@@ -53,9 +50,6 @@ class AuthApi extends BaseAPI {
       throw CustomException(DioErrorUtil.handleError(e));
     }
   }
-
-
-
 
   Future<ProfileModel> getMe() async {
     try {
@@ -77,11 +71,6 @@ class AuthApi extends BaseAPI {
       throw CustomException(DioErrorUtil.handleError(e));
     }
   }
-
-
-
-
-
 
   Future<EditProfileModel> editgetMe(Map<String, String> data) async {
     try {

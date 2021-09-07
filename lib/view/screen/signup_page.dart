@@ -13,8 +13,6 @@ class SignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String token = ModalRoute.of(context).settings.arguments as String;
-
     return BaseView<AuthViewModel>(
         onModelReady: (
           AuthViewModel model,

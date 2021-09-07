@@ -2,14 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:jiji_clone/core/model/user_model2.dart';
 import 'package:jiji_clone/core/routes/router.dart';
 import 'package:jiji_clone/core/view_models/skills_vm.dart';
+import 'package:jiji_clone/view/screen/Admin/admin_skill_screen.dart';
 import 'package:jiji_clone/view/screen/homepage/home_appbar.dart';
 import 'package:jiji_clone/view/screen/skills_screen.dart';
 import 'package:jiji_clone/view/widgets/export.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 
 class HomeSccreen extends StatelessWidget {
+  
+  final UserModel userModel;
+  HomeSccreen({this.userModel});
+
   final spinkit = SpinKitCircle(
     color: Styles.appBackground,
     size: 30.0,
@@ -34,8 +40,10 @@ class HomeSccreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Heading(),
-                      verticalSpaceMedium,
+                      Heading(
+                          text: userModel.user.userType == 'CUSTOMER'
+                              ? 'Hire the best Heartisan'
+                              : 'Post a new service'),
                       Expanded(
                         child: LoadingOverlay(
                           isLoading: model.busy,
@@ -48,12 +56,21 @@ class HomeSccreen extends StatelessWidget {
                             itemBuilder: (BuildContext context, int index) {
                               return GestureDetector(
                                   onTap: () {
-                                    routeTo(
-                                        context,
-                                        SkillScreen(
-                                          skills: model.allSkills[index],
-                                          skillTitle: model.allSkills[index].title,
-                                        ));
+                                    userModel.user.userType == 'CUSTOMER'
+                                        ? routeTo(
+                                            context,
+                                            SkillScreen(
+                                              skills: model.allSkills[index],
+                                              skillTitle:
+                                                  model.allSkills[index].title,
+                                            ))
+                                        : routeTo(
+                                            context,
+                                            AdminSkillsScreen(
+                                              skills: model.allSkills[index],
+                                              skillTitle:
+                                                  model.allSkills[index].title,
+                                            ));
                                   },
                                   child: Container(
                                     padding: EdgeInsets.all(14),
@@ -91,8 +108,7 @@ class HomeSccreen extends StatelessWidget {
                                                   ),
                                                 ),
                                                 Center(
-                                                  child:
-                                                   SvgPicture.network(
+                                                  child: SvgPicture.network(
                                                     model.allSkills[index]
                                                             ?.image ??
                                                         '',
